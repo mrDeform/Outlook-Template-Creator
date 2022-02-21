@@ -19,7 +19,7 @@ class App:
         self.window = window
         self.window.title("Link down")
         self.found_channel = None
-        self.main_file = True
+        self.main_file = None
 
         self.point1_lbl = Label(window, text='Router1')
         self.point1 = Entry(window)
@@ -58,6 +58,7 @@ class App:
         if p1 == "" or p2 == "":
             showinfo(title='INFO', message="Enter 'Router1' and 'Router2'")
         else:
+            self.main_file = True
             df = read_excel('File_Channel_1.xlsx', sheet_name=0, dtype=str).fillna('')
             if df.empty:
                 showinfo(title='ERROR', message="DataFrame is empty!\n'File_Channel_1.xlsx'")
