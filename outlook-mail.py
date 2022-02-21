@@ -120,7 +120,7 @@ class App:
             contact = self.found_channel['Email for message'].values[0]
 
         region_name = self.found_channel['region_reduction'].values[0]
-        if region_name != '':
+        if (region_name != '') & (not reg_dict.loc[reg_dict.Regions.str.contains(region_name)].empty):
             region_id = reg_dict.loc[reg_dict.Regions.str.contains(region_name)]['id'].values[0]
         else:
             region_id = 'Region_reduction'
@@ -162,12 +162,12 @@ def main():
     x = (root.winfo_screenwidth() - root.winfo_reqwidth()) / 2
     y = (root.winfo_screenheight() - root.winfo_reqheight()) / 2
     root.wm_geometry("+%d+%d" % (x, y))
-    App(root)
-
-
-if __name__ == '__main__':
     if isfile('dict.csv') & isfile('File_Channel_1.xlsx') & isfile('File_Channel_2.xlsx'):
-        main()
+        App(root)
     else:
         showinfo(title='INFO', message='Download files to directory:\n- "dict.csv"\n- "File_Channel_1.xlsx"'
                                        '\n- "File_Channel_2.xlsx"')
+
+
+if __name__ == '__main__':
+    main()
